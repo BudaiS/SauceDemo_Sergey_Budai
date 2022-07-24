@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ItemDetailsPage extends HomePage {
     private final By backToProductsButton = By.id("back-to-products");
@@ -16,15 +17,19 @@ public class ItemDetailsPage extends HomePage {
     }
 
     public void clickAddToCartButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
         driver.findElement(addToCartButton).click();
     }
 
     public void clickBackToProducts() {
+        wait.until(ExpectedConditions.elementToBeClickable(backToProductsButton));
         driver.findElement(backToProductsButton).click();
     }
+
     public String getItemName() {
         return driver.findElement(itemName).getText();
     }
+
     public String getItemDescription() {
         return driver.findElement(itemDescription).getText();
     }
@@ -32,7 +37,6 @@ public class ItemDetailsPage extends HomePage {
     public String getItemPrice() {
         return driver.findElement(itemPrice).getText();
     }
-
 
 
 }
