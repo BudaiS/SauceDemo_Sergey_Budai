@@ -10,8 +10,11 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.ProductsPage;
+import pages.TestListener;
 
 import java.util.concurrent.TimeUnit;
+
+@Listeners(TestListener.class)
 
 public class BaseTests {
     protected String USERNAME = "standard_user";

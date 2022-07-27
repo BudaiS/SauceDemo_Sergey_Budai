@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.Set;
@@ -16,8 +15,6 @@ public abstract class HomePage extends BasePage {
     private final By linkedInLink = By.xpath("//a[text()='LinkedIn']");
     private final By closeMenuButton = By.id("react-burger-cross-btn");
     private final By logoutButton = By.id("logout_sidebar_link");
-
-    WebDriverWait wait = new WebDriverWait(driver, 20);
 
 
     public HomePage(WebDriver driver) {
@@ -65,34 +62,15 @@ public abstract class HomePage extends BasePage {
         return driver.findElement(logoutButton).isDisplayed();
     }
 
-    public String getFacebookUrl() {
+    public String getPageUrl() {
         Set<String> allWindows = driver.getWindowHandles();
         List<String> allWindowsList = allWindows.stream().toList();
         driver.switchTo().window(allWindowsList.get(1));
-        String facebookUrl = driver.getCurrentUrl();
+        String pageUrl = driver.getCurrentUrl();
         driver.close();
         driver.switchTo().window(allWindowsList.get(0));
-        return facebookUrl;
+        return pageUrl;
     }
 
-    public String getTwitterUrl() {
-        Set<String> allWindows = driver.getWindowHandles();
-        List<String> allWindowsList = allWindows.stream().toList();
-        driver.switchTo().window(allWindowsList.get(1));
-        String twitterUrl = driver.getCurrentUrl();
-        driver.close();
-        driver.switchTo().window(allWindowsList.get(0));
-        return twitterUrl;
-    }
-
-    public String getLinkedInkUrl() {
-        Set<String> allWindows = driver.getWindowHandles();
-        List<String> allWindowsList = allWindows.stream().toList();
-        driver.switchTo().window(allWindowsList.get(1));
-        String linkedInkUrl = driver.getCurrentUrl();
-        driver.close();
-        driver.switchTo().window(allWindowsList.get(0));
-        return linkedInkUrl;
-    }
 
 }

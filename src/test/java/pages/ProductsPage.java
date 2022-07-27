@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -63,122 +61,25 @@ public class ProductsPage extends HomePage {
         return productContainer.findElement(productDescription).getText();
     }
 
-    public void clickOnFilterZtoA() {
+
+    public void clickFilter(String filterText) {
         select = new Select(driver.findElement(productSortContainer));
-        select.selectByVisibleText("Name (Z to A)");
+        select.selectByVisibleText(filterText);
     }
 
-    public String getFirstItemNameOnFilterZtoA() {
+
+    public ArrayList<String> getItemNameOnFilter() {
         List<WebElement> itemName = driver.findElements(productName);
         ArrayList<String> listName = new ArrayList<>();
-        for (WebElement webElement : itemName) {
-            listName.add(webElement.getText());
-        }
-        listName.sort(Comparator.reverseOrder());
-        return listName.get(0);
-
-
+        itemName.stream().map(WebElement::getText).forEach(listName::add);
+        return listName;
     }
 
-    public String getLastItemNameOnFilterZtoA() {
-        List<WebElement> itemName = driver.findElements(productName);
+    public ArrayList<String> getItemPriceOnFilter() {
+        List<WebElement> itemName = driver.findElements(productPrice);
         ArrayList<String> listName = new ArrayList<>();
-        for (WebElement webElement : itemName) {
-            listName.add(webElement.getText());
-        }
-        listName.sort(Comparator.reverseOrder());
-        return listName.get(listName.size() - 1);
-
-
-    }
-
-    public void clickOnFilterAtoZ() {
-        select = new Select(driver.findElement(productSortContainer));
-        select.selectByVisibleText("Name (A to Z)");
-    }
-
-    public String getFirstItemNameOnFilterAtoZ() {
-        List<WebElement> itemName = driver.findElements(productName);
-        ArrayList<String> listName = new ArrayList<>();
-        for (WebElement webElement : itemName) {
-            listName.add(webElement.getText());
-        }
-        listName.stream().sorted();
-        return listName.get(0);
-
-
-    }
-
-    public String getLastItemNameOnFilterAtoZ() {
-        List<WebElement> itemName = driver.findElements(productName);
-        ArrayList<String> listName = new ArrayList<>();
-        for (WebElement webElement : itemName) {
-            listName.add(webElement.getText());
-        }
-        listName.stream().sorted();
-        return listName.get(listName.size() - 1);
-
-
-    }
-
-    public void clickFilterOnPriceLowToHigh() {
-        select = new Select(driver.findElement(productSortContainer));
-        select.selectByVisibleText("Price (low to high)");
-    }
-
-
-    public double getFirstItemPriceOnFilterLowToHigh() {
-        List<WebElement> itemPrice = driver.findElements(productPrice);
-        ArrayList<String> listPrice = new ArrayList<>();
-        double[] valuePrice = new double[itemPrice.size()];
-        for (int i = 0; i < itemPrice.size(); i++) {
-            listPrice.add(itemPrice.get(i).getText().substring(1));
-            valuePrice[i] = Double.parseDouble(listPrice.get(i));
-        }
-        Arrays.stream(valuePrice).sorted();
-
-        return valuePrice[0];
-    }
-
-    public double getLastItemPriceOnFilterLowToHigh() {
-        List<WebElement> itemPrice = driver.findElements(productPrice);
-        ArrayList<String> listPrice = new ArrayList<>();
-        double[] valuePrice = new double[itemPrice.size()];
-        for (int i = 0; i < itemPrice.size(); i++) {
-            listPrice.add(itemPrice.get(i).getText().substring(1));
-            valuePrice[i] = Double.parseDouble(listPrice.get(i));
-        }
-        Arrays.stream(valuePrice).sorted();
-        return valuePrice[valuePrice.length - 1];
-    }
-
-    public void clickFilterOnPriceHighToLow() {
-        select = new Select(driver.findElement(productSortContainer));
-        select.selectByVisibleText("Price (high to low)");
-    }
-
-    public double getLastItemPriceOnFilterHighToLow() {
-        List<WebElement> itemPrice = driver.findElements(productPrice);
-        ArrayList<String> listPrice = new ArrayList<>();
-        double[] valuePrice = new double[itemPrice.size()];
-        for (int i = 0; i < itemPrice.size(); i++) {
-            listPrice.add(itemPrice.get(i).getText().substring(1));
-            valuePrice[i] = Double.parseDouble(listPrice.get(i));
-        }
-        Arrays.stream(valuePrice).sorted();
-        return valuePrice[valuePrice.length - 1];
-    }
-
-    public double getFirstItemPriceOnFilterHighToLow() {
-        List<WebElement> itemPrice = driver.findElements(productPrice);
-        ArrayList<String> listPrice = new ArrayList<>();
-        double[] valuePrice = new double[itemPrice.size()];
-        for (int i = 0; i < itemPrice.size(); i++) {
-            listPrice.add(itemPrice.get(i).getText().substring(1));
-            valuePrice[i] = Double.parseDouble(listPrice.get(i));
-        }
-        Arrays.stream(valuePrice).sorted();
-        return valuePrice[0];
+        itemName.stream().map(WebElement::getText).forEach(listName::add);
+        return listName;
     }
 
 

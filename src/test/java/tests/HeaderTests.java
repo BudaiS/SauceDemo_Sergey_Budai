@@ -36,21 +36,21 @@ public class HeaderTests extends BaseTests {
     public void facebookLink() {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.clickFacebookLink();
-        Assert.assertEquals(productsPage.getFacebookUrl(), EXPECTED_FACEBOOK_URL, "Checking the link facebook");
+        Assert.assertEquals(productsPage.getPageUrl(), EXPECTED_FACEBOOK_URL, "Checking the link facebook");
     }
 
     @Test(groups = {"Regression"})
     public void twitterLink() {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.clickTwitterLink();
-        Assert.assertEquals(productsPage.getTwitterUrl(), EXPECTED_TWITTER_URL, "Checking the link twitter");
+        Assert.assertEquals(productsPage.getPageUrl(), EXPECTED_TWITTER_URL, "Checking the link twitter");
     }
 
     @Test(groups = {"Regression"})
     public void linkedInLink() {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.clickLinkedInLink();
-        Assert.assertEquals(productsPage.getLinkedInkUrl(), EXPECTED_LINKEDIN_URL, "Checking the link linkedIn");
+        Assert.assertEquals(productsPage.getPageUrl(), EXPECTED_LINKEDIN_URL, "Checking the link linkedIn");
     }
 
 }
