@@ -62,7 +62,7 @@ public abstract class HomePage extends BasePage {
         return driver.findElement(logoutButton).isDisplayed();
     }
 
-    public String getPageUrl() {
+    public String getUrlFromNewlyOpenedTab() {
         Set<String> allWindows = driver.getWindowHandles();
         List<String> allWindowsList = allWindows.stream().toList();
         driver.switchTo().window(allWindowsList.get(1));

@@ -38,6 +38,7 @@ public class BaseTests {
 
     @BeforeClass(alwaysRun = true)
     public void setUp(@Optional("chrome") String browserName, ITestContext testContext) throws Exception {
+
         if (browserName.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();

@@ -1,14 +1,11 @@
 package pages;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import utils.AllureUtils;
 
-import java.io.File;
-import java.io.IOException;
 
 public class TestListener implements ITestListener {
     @Override
@@ -28,11 +25,6 @@ public class TestListener implements ITestListener {
         ITestListener.super.onTestFailure(result);
         System.out.println("Test " + result.getName() + " failed");
         WebDriver driver = (WebDriver) result.getTestContext().getAttribute("driver");
-        File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(file, new File("target/surefire-reports/screenshots/screenshot_" + result.getName() + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        AllureUtils.attachScreenshot(driver);
     }
 }
