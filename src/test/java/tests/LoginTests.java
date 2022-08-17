@@ -1,41 +1,41 @@
 package tests;
+
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTests {
+    private final static String ERROR_PASSWORD_MESSAGE = "Epic sadface: Password is required";
+    private final static String ERROR_USERNAME_MESSAGE = "Epic sadface: Username is required";
 
 
-
-
-    @Test
-    public void positiveLoginTest() {
-        loginPage.login("standard_user", "secret_sauce");
+    @Test(groups = {"Smoke"})
+    public void loginTests() {
+        loginPage.login(USERNAME, PASSWORD);
         Assert.assertTrue(productsPage.isProductSortContainerDisplayed(),
                 "Check if the element has appeared on ProductsPage");
 
     }
 
-    @Test
-    public void negativeWrongPasswordLoginTests() {  // enter wrong password
-        loginPage.setUsernameInput("standard_user");
-        loginPage.setPasswordInput("");
+
+    @Test(groups = {"Negative"}, dataProvider = "negativeLoginTests")
+    public void negativeLoginTests(String userName, String password, String errorMessage) {  // enter wrong username
+        loginPage.setUsernameInput(userName);
+        loginPage.setPasswordInput(password);
         loginPage.clickLoginButton();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Checking for an error message");
-        Assert.assertEquals(loginPage.getErrorMessageText(),
-                "Epic sadface: Password is required",
-                "We check the appearance of an error message about an incorrect password entry");
+        Assert.assertEquals(loginPage.getErrorMessageText(), errorMessage,
+                "We check the appearance of an error message about an incorrect username entry");
 
     }
 
-    @Test
-    public void negativeWrongUsernameLoginTests() {  // enter wrong username
-        loginPage.setUsernameInput("");
-        loginPage.setPasswordInput("secret_sauce");
-        loginPage.clickLoginButton();
-        Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Checking for an error message");
-        Assert.assertEquals(loginPage.getErrorMessageText(),
-                "Epic sadface: Username is required",
-                "We check the appearance of an error message about an incorrect username entry");
+    @DataProvider
+    public Object[][] negativeLoginTests() {
+        return new Object[][]{
+                {EMPTY, PASSWORD, ERROR_USERNAME_MESSAGE},
+                {USERNAME, EMPTY, ERROR_PASSWORD_MESSAGE},
+                {EMPTY, EMPTY, ERROR_USERNAME_MESSAGE},
+        };
 
     }
 

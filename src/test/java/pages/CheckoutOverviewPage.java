@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckoutOverviewPage extends HomePage {
     private final By finishButton = By.id("finish");
@@ -15,6 +16,7 @@ public class CheckoutOverviewPage extends HomePage {
     }
 
     public void clickCancelButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(cancelButton));
         driver.findElement(cancelButton).click();
     }
 
@@ -31,6 +33,7 @@ public class CheckoutOverviewPage extends HomePage {
     }
 
     public void clickFinishButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(finishButton));
         driver.findElement(finishButton).click();
     }
 
