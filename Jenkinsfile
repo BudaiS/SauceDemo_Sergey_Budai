@@ -8,7 +8,9 @@ pipeline {
 
     parameters {
      gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-    }
+     string(defaultValue: 'regression.xml', name: 'SUITE_NAME', trim: true)
+     choice(choices: 'chrome', description: 'browser', name: 'BROWSER')
+             }
 
   stages {
         stage('Run tests') {

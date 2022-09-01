@@ -2,6 +2,7 @@ package tests;
 
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -26,16 +27,28 @@ public class ProductsTests extends BaseTests {
     private final static String HIGH_TO_LOW = "Price (high to low)";
 
 
-    @Test(groups = {"Regression"})
-    public void verifyItemPriceNameDescriptionOnProductsPage() {
+    @Test(groups = {"Regression"}, dataProvider = "allItemsDetails")
+    public void verifyItemPriceNameDescriptionOnProductsPage(String name, String price, String description) {
         loginPage.login(USERNAME, PASSWORD);
-        Assert.assertEquals(productsPage.getProductPrice(PRODUCT_NAME), ITEM_PRICE,
-                "Checking the price of a product");
-        Assert.assertEquals(productsPage.getProductName(PRODUCT_NAME), PRODUCT_NAME,
+        Assert.assertEquals(productsPage.getProductName(name), name,
                 "Checking the product name");
-        Assert.assertEquals(productsPage.getProductDescription(PRODUCT_NAME), ITEM_DESCRIPTION,
+        Assert.assertEquals(productsPage.getProductPrice(name), price,
+                "Checking the price of a product");
+        Assert.assertEquals(productsPage.getProductDescription(name), description,
                 "Checking the product description");
 
+    }
+
+    @DataProvider
+    public Object[][] allItemsDetails() {
+        return new Object[][]{
+                {"Sauce Labs Backpack", "$29.99", "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection."},
+                {"Sauce Labs Bike Light", "$9.99", "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included."},
+                {"Sauce Labs Bolt T-Shirt", "$15.99", "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt."},
+                {"Sauce Labs Fleece Jacket", "$49.99", "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office."},
+                {"Sauce Labs Onesie", "$7.99", "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel."},
+                {"Test.allTheThings() T-Shirt (Red)", "$15.99", "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton."}
+        };
     }
 
 

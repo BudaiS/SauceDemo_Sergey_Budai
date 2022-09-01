@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,6 +17,8 @@ public class ItemDetailsTests extends BaseTests {
     }
 
     @Test(groups = {"Regression"})
+    @Description("Verify item name and price on details page")
+    @Attachment(value = "screenshot", type = "image/png")
     public void verifyItemNameAndPriceOnDetailsPage() {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.openItemByName(PRODUCT_NAME);
@@ -24,6 +28,8 @@ public class ItemDetailsTests extends BaseTests {
     }
 
     @Test(groups = {"Regression"})
+    @Description("Verify description on details page")
+    @Attachment(value = "screenshot", type = "image/png")
     public void verifyItemDescriptionOnDetailsPage() {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.openItemByName(PRODUCT_NAME);
