@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,6 +12,8 @@ public class LoginTests extends BaseTests {
 
 
     @Test(groups = {"Smoke"})
+    @Description("positive login tests")
+    @Attachment(value = "screenshot", type = "image/png")
     public void loginTests() {
         loginPage.login(USERNAME, PASSWORD);
         Assert.assertTrue(productsPage.isProductSortContainerDisplayed(),

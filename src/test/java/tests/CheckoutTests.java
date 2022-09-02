@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -30,6 +32,8 @@ public class CheckoutTests extends BaseTests {
     }
 
     @Test(groups = {"Smoke"})
+    @Description("Positive checkout tests")
+    @Attachment(value = "screenshot", type = "image/png")
     public void checkoutTests() {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.clickAddToCartButton(PRODUCT_NAME);
